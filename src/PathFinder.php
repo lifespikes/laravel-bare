@@ -29,7 +29,7 @@ class PathFinder
     {
         $merge = ['app' => $paths];
 
-        $this->config = array_merge_recursive_distinct(
+        $this->config = \LifeSpikes\LaravelBare\Bootstrap\array_merge_recursive_distinct(
             $this->config,
             $merge
         );

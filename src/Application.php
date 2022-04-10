@@ -45,7 +45,7 @@ class Application extends \Illuminate\Foundation\Application
 
         array_map(
             fn (string $provider) => $this->register($provider),
-            data_get($manifest, 'extra.laravel.providers')
+            data_get($manifest, 'extra.laravel.providers', [])
         );
     }
 
