@@ -8,9 +8,6 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      packages: write
     steps:
       - uses: actions/checkout@master
       - uses: "marvinpinto/action-automatic-releases@latest"
