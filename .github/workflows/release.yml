@@ -15,4 +15,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         with:
-          args: ${GITHUB_REF#refs/tags/}
+          args: ${{ github.ref_name }}

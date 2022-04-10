@@ -1,4 +1,6 @@
 # Laravel Bare
+_Component of `lifespikes/lifespikes`_
+
 A very minimalist and customizable Laravel installation. Ideal for customizing Laravel path
 resolutions and discovering service providers when working with a monorepo using
 `symplify/monorepo-builder`
