@@ -1,0 +1,61 @@
+<?php
+
+namespace LifeSpikes\LaravelBare;
+
+use Closure;
+use RuntimeException;
+
+class PathFinder
+{
+    private array $config;
+
+    public function __construct(array $paths = [])
+    {
+        $this->config = require_once __DIR__.'/../config/paths.php';
+    }
+
+    public static function getInstance()
+    {
+        static $instance;
+
+        if ($instance === null) {
+            $instance = new static();
+        }
+
+        return $instance;
+    }
+
+    public function setAppPaths(array $paths)
+    {
+        $merge = ['app' => $paths];
+
+        $this->config = array_merge_recursive_distinct(
+            $this->config,
+            $merge
+        );
+    }
+
+    public function appNamespace(): string
+    {
+        return $this->config['app']['namespace'];
+    }
+
+    public function kernel(string $key, string $path = ''): string
+    {
+        return $this->resolve($key, $path, 'kernel');
+    }
+
+    public function app(string $key, string $path = ''): string
+    {
+        return $this->resolve($key, $path);
+    }
+
+    public function resolve(string $key, string $path = '', string $type = 'app'): string
+    {
+        $config = $this->config;
+        $files = $config[$type];
+        $directory = realpath("$files[base]/{$files['paths'][$key]}");
+
+        return rtrim($directory . '/' . ltrim($path ), '/');
+    }
+}
