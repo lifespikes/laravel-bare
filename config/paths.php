@@ -2,7 +2,7 @@
 
 return [
     'app'      =>  [
-        /**s
+        /**
          * Primary app namespace
          */
         'namespace' =>  'LifeSpikes\\LaravelBare\\',
@@ -12,7 +12,7 @@ return [
          * levels up, since usually that's the depth of a vendor
          * or monorepo package plus the config directory depth.
          */
-        'base'  => realpath(__DIR__ . '/../../../'),
+        'base'  => realpath(__DIR__ . '/../../../../'),
 
         /**
          * Except for core config and bootstrap files,

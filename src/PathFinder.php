@@ -9,20 +9,20 @@ class PathFinder
 {
     private array $config;
 
+    static $_instance;
+
     public function __construct(array $paths = [])
     {
         $this->config = require_once __DIR__.'/../config/paths.php';
     }
 
-    public static function getInstance()
+    public static function getInstance(): static
     {
-        static $instance;
-
-        if ($instance === null) {
-            $instance = new static();
+        if (self::$_instance === null) {
+            self::$_instance = new static();
         }
 
-        return $instance;
+        return self::$_instance;
     }
 
     public function setAppPaths(array $paths)
