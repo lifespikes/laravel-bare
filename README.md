@@ -1,4 +1,5 @@
 # Laravel Bare
+
 _Component of `lifespikes/lifespikes`_
 
 A very minimalist and customizable Laravel installation. Ideal for customizing Laravel path
@@ -6,16 +7,17 @@ resolutions and discovering service providers when working with a monorepo using
 `symplify/monorepo-builder`
 
 - [Getting Started](#installation)
-  - [Installation](#installation)
+    - [Installation](#installation)
 - [Usage](#usage)
-  - [Configuration](#customizing-directories)
-  - [Registering Packages](#local-package-discovery)
-  - [Building Apps on Bare](#building-apps-on-bare)
+    - [Configuration](#customizing-directories)
+    - [Registering Packages](#local-package-discovery)
+    - [Building Apps on Bare](#building-apps-on-bare)
 - [FAQ](#faq)
-  - [Where is the [X] directory?](#where-is-the-x-directory)
-  - [Why should I use Bare?](#why-go-bare)
+    - [Where is the [X] directory?](#where-is-the-x-directory)
+    - [Why should I use Bare?](#why-go-bare)
 
 ## Installation
+
 Setting up Bare is a bit different from a regular Laravel installation:
 
 - No boilerplate/skeleton code
@@ -71,10 +73,12 @@ bare(__DIR__ . '/../')->web();
 ```
 
 ## Usage
+
 There's no special configuration or usage for Bare besides its path
 configuration and `monorepo-builder` support.
 
 ### Customizing Directories
+
 The `bare()` bootstrap helper takes a base path as its first argument. However,
 you can also pass an array of paths that Laravel will use as values when trying
 to resolve against path instances like `resource_path`, `database_path`, etc.
@@ -93,6 +97,7 @@ bare([
 Defaults can be found in the `config/paths.php` file.
 
 ### Local Package Discovery
+
 If you have built Laravel packages in the past, you're probably familiar
 with the `{"extra": {"laravel": {...}}}` section of your composer.json file.
 
@@ -110,6 +115,7 @@ Laravel packages you wish to isolate.
 [Read more about package discovery.](https://laravel.com/docs/9.x/packages#package-discovery)
 
 ### Building Apps on Bare
+
 Bare is meant to be used as a base for building package-driven SOLID codebases.
 This means you'll have to write your own service providers and bootstrap code as
 explained earlier. Primarily, for example, we use bare as a simple way for us
@@ -121,6 +127,7 @@ https://laravel.com/docs/9.x/packages
 ## FAQ
 
 ### Where is the [X] directory?
+
 Bare allows you to use Laravel as a library. It contains all the default
 configurations found in the `laravel/laravel` scaffold, but removes all dependencies
 in the `App\` namespace.
@@ -131,6 +138,7 @@ to your module.
 If you're wondering why we did this, read the section below.
 
 ### Why go Bare?
+
 When people think about Laravel, they usually think of two things:
 
 - A web framework
@@ -146,5 +154,5 @@ codebase. This pattern is often seen in low-level languages like C, C++,
 ASM, etc. _(OpenSSL, SDL, Vulkan, OpenGL, are good examples)_
 
 This project is intended for developers with an architectural background
-looking to harness the power of Laravel, while maintaining the freedom to 
+looking to harness the power of Laravel, while maintaining the freedom to
 implement their own structures and patterns.

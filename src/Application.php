@@ -13,10 +13,9 @@
 
 namespace LifeSpikes\LaravelBare;
 
-use JsonException;
 use Illuminate\Support\Env;
 use Illuminate\Support\Str;
-use Illuminate\Foundation\Bootstrap\LoadConfiguration;
+use Illuminate\Foundation\Bootstrap\RegisterProviders;
 use function LifeSpikes\LaravelBare\Bootstrap\pathfinder;
 
 class Application extends \Illuminate\Foundation\Application
@@ -31,7 +30,7 @@ class Application extends \Illuminate\Foundation\Application
 
         parent::__construct($basePath ?? $this->pathFinder->app('base'));
 
-        $this->beforeBootstrapping(\Illuminate\Foundation\Bootstrap\RegisterProviders::class, function () {
+        $this->beforeBootstrapping(RegisterProviders::class, function () {
             $this->loadRootProviders();
         });
     }

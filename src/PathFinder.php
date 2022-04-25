@@ -2,18 +2,15 @@
 
 namespace LifeSpikes\LaravelBare;
 
-use Closure;
-use RuntimeException;
-
 class PathFinder
 {
     private array $config;
 
-    static $_instance;
+    public static $_instance;
 
     public function __construct(array $paths = [])
     {
-        $this->config = require_once __DIR__.'/../config/paths.php';
+        $this->config = require_once __DIR__ . '/../config/paths.php';
     }
 
     public static function getInstance(): static
@@ -56,6 +53,6 @@ class PathFinder
         $files = $config[$type];
         $directory = realpath("$files[base]/{$files['paths'][$key]}");
 
-        return rtrim($directory . '/' . ltrim($path ), '/');
+        return rtrim($directory . '/' . ltrim($path), '/');
     }
 }

@@ -11,10 +11,10 @@
 |
 */
 
-use LifeSpikes\LaravelBare\PathFinder;
-use function \LifeSpikes\LaravelBare\Bootstrap\pathfinder;
+use LifeSpikes\LaravelBare\Application;
+use function LifeSpikes\LaravelBare\Bootstrap\pathfinder;
 
-$app = new \LifeSpikes\LaravelBare\Application(
+$app = new Application(
     $_ENV['APP_BASE_PATH'] ?? pathfinder()->app('base')
 );
 
