@@ -30,6 +30,8 @@ class Application extends \Illuminate\Foundation\Application
 
         parent::__construct($basePath ?? $this->pathFinder->app('base'));
 
+        $this->useLangPath($this->langPath());
+
         $this->beforeBootstrapping(RegisterProviders::class, function () {
             $this->loadRootProviders();
         });
@@ -51,6 +53,11 @@ class Application extends \Illuminate\Foundation\Application
     public function path($path = ''): string
     {
         return $this->pathFinder->app('app', $path);
+    }
+
+    public function basePath($path = ''): string
+    {
+        return $this->pathFinder->app('base', $path);
     }
 
     public function publicPath(): string
