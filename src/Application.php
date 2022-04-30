@@ -15,6 +15,8 @@ namespace LifeSpikes\LaravelBare;
 
 use Illuminate\Support\Env;
 use Illuminate\Support\Str;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Foundation\PackageManifest as Manifest;
 use Illuminate\Foundation\Bootstrap\RegisterProviders;
 use function LifeSpikes\LaravelBare\Bootstrap\pathfinder;
 
@@ -32,22 +34,43 @@ class Application extends \Illuminate\Foundation\Application
 
         $this->useLangPath($this->langPath());
 
-        $this->beforeBootstrapping(RegisterProviders::class, function () {
-            $this->loadRootProviders();
-        });
+        /* Load monorepo providers */
+
+        $this->singleton(Manifest::class, $this->getManifestClosure());
     }
 
-    private function loadRootProviders()
+    public function getManifestClosure(): \Closure
     {
-        $manifest = json_decode(
-            file_get_contents($this->pathFinder->app('base', 'composer.json')),
-            true
-        );
+        return function ($app) {
+            $args = [new Filesystem, $this->basePath(), $this->getCachedPackagesPath()];
 
-        array_map(
-            fn (string $provider) => $this->register($provider),
-            data_get($manifest, 'extra.laravel.providers', [])
-        );
+            return new class(...$args) extends Manifest {
+                public function write(array $manifest)
+                {
+                    $providers = $this->getMonorepoProviders();
+                    $label = count($providers).' monorepo packages';
+
+                    $manifest[$label] = [
+                        'providers' =>  $providers,
+                        'aliases'   =>  [],
+                    ];
+
+                    parent::write($manifest);
+                }
+
+                private function getMonorepoProviders()
+                {
+                    return data_get(
+                        json_decode(
+                            file_get_contents($this->basePath.'/composer.json'),
+                            true
+                        ),
+                        'extra.laravel.providers',
+                        []
+                    );
+                }
+            };
+        };
     }
 
     public function path($path = ''): string
