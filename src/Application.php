@@ -147,4 +147,15 @@ class Application extends \Illuminate\Foundation\Application
             ? $env
             : $this->basePath($env);
     }
+
+    /**
+     * Register multiple binds at once.
+     * @param array $binds
+     */
+    public function binds(array $binds): void
+    {
+        foreach ($binds as $abstract => $concrete) {
+            $this->bind($abstract, $concrete);
+        }
+    }
 }
