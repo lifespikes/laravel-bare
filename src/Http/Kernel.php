@@ -44,7 +44,11 @@ class Kernel extends HttpKernel
             VerifyCsrfToken::class,
             ShareErrorsFromSession::class,
             SubstituteBindings::class,
-        ]
+        ],
+        'api' => [
+            'throttle:api',
+            SubstituteBindings::class,
+        ],
     ];
 
     protected $routeMiddleware = [
