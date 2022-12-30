@@ -32,7 +32,7 @@ class Bare
             }
 
             if (!defined('LARAVEL_START')) {
-                throw new RuntimeException('Please define LARAVEL_START prior to bootstrap.');
+                define('LARAVEL_START', microtime(true));
             }
 
             return ($this->application = require_once __DIR__ . '/../../bootstrap/app.php');
