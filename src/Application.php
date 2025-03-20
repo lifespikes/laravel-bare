@@ -83,9 +83,9 @@ class Application extends \Illuminate\Foundation\Application
         return $this->pathFinder->app('base', $path);
     }
 
-    public function publicPath(): string
+    public function publicPath($path = 'public'): string
     {
-        return $this->pathFinder->app('public');
+        return $this->pathFinder->app($path);
     }
 
     public function storagePath($path = ''): string
