@@ -1,5 +1,6 @@
 {
     "name": "lifespikes/laravel-bare",
+    "version": "v0.8.96",
     "require-dev": {
         "laravel/framework": "^12.0"
     },
